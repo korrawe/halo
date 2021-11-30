@@ -44,7 +44,7 @@ cd halo_base
 python train.py
 ```
 Each data point consists of 3D keypoints, transformation matrices, and a hand surface. To speed up the training, all transformation matrices are precomputed, either by out Canonicalization Layer or from the MANO.
-We use the surface point sampling and occupancy computation method from the [Occupancy Networks Code](https://github.com/autonomousvision/occupancy_networks)
+We use the surface point sampling and occupancy computation method from the [Occupancy Networks](https://github.com/autonomousvision/occupancy_networks)
 
 
 ## HALO-VAE
@@ -61,4 +61,4 @@ We use the surface point sampling and occupancy computation method from the [Occ
 ```
 
 # Acknowledgement
-We  sincerely  acknowledge  ShaofeiWang and Marko Mihajlovic for the insightful discussionsand helps with the baselines.
+We  sincerely  acknowledge  Shaofei Wang and Marko Mihajlovic for the insightful discussionsand helps with the baselines.
