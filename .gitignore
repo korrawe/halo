@@ -139,3 +139,8 @@ dmypy.json
 /scripts/mano/
 /scripts/resource/
 /scripts/dataset/mano/
+/halo/exp/
+/halo/scripts/manopth/
+/halo/scripts/mano/
+/halo/scripts/resource/
+/halo/scripts/dataset/mano/
