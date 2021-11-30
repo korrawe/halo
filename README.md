@@ -60,6 +60,7 @@ To train HALO-VAE, run:
 cd halo
 python train.py
 ```
+HALO_VAE requires a HALO base model trained using the transformation matrices from the Canonicalization Layer. The weights of the base model are not updated during the VAE training.
 
 # BibTex
 ```
