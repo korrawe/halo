@@ -21,8 +21,8 @@ We demonstrate the applicability of HALO to the task of conditional generation o
 
 # Running the code
 ## Download the model
-HALO base: 
-HALO-VAE:
+HALO base: <br/>
+HALO-VAE: <br/>
 
 ## Implicit surface from keypoints
 ![halo_hand](/assets/halo_hand.gif "HALO teaser")
@@ -41,6 +41,7 @@ To evaluate the hand surface, run:
 cd halo_base
 python eval_meshes.py
 ```
+You can find the produced meshes from our keypoint model on Youtube3D test set [here](https://drive.google.com/drive/folders/1dvz0R39Fk_iX2SnZ4G9tDyzfuOy8sbZN?usp=sharing).
 
 
 ## HALO-VAE
