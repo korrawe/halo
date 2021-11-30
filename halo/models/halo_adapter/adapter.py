@@ -16,9 +16,6 @@ from models.utils import visualize as vis
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-# sys.path.insert(0, "/home/korrawe/nasa/scripts")
-# from visualize_utils import set_equal_xyz_scale
-# from sample_surface_point_from_nasa import get_halo_model, create_template_nasa
 
 class HaloAdapter(nn.Module):
     def __init__(self, halo_config_file, store=False, device=None,
@@ -29,8 +26,6 @@ class HaloAdapter(nn.Module):
 
         # self.halo_model = get_halo_model(halo_config_file)
         self.halo_config_file = halo_config_file
-        # halo_config_file = '/home/korrawe/nasa/configs/sample_hands/yt3d_all_bone_no_wn_pc_1.yaml'
-        # halo_config_file = '/home/korrawe/nasa/configs/iccv/yt3d_b16_keypoint.yaml'
         self.halo_model, self.halo_generator = get_halo_model(self.halo_config_file)
         # Freeze halo
         self.freeze_halo()
@@ -38,16 +33,8 @@ class HaloAdapter(nn.Module):
         # 3D keypoints to transformation matrices converter
         self.global_normalizer = transform_to_canonical
         self.pose_normalizer = PoseConverter(straight_hand=True)  # <- TODO: check this
-
-        # self.kps_to_trans_layer = None
-        # denoiser_pth = True
-        # denoiser_pth = None
-        print("denoiser", denoiser_pth)
-        if denoiser_pth is not None:
-            denoiser_pth = "/home/korrawe/halo_vae/exp/denoising/model/best.pt"
-            self.denoising_layer = get_projection_layer(denoiser_pth)
-        else:
-            self.denoising_layer = None
+        
+        self.denoising_layer = None
 
     def freeze_halo(self):
         for param in self.halo_model.parameters():

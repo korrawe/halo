@@ -35,7 +35,7 @@ model:
   skinning_weight: 0.0  # 2.0  #   0.5
   use_bone_length: true
 training:
-  out_dir:  /home/korrawe/nasa/exp/sample_hand/youtube_keypoint_normalized_fix
+  out_dir: /home/korrawe/github_website/halo/resource/halo_base_yt3d # /home/korrawe/nasa/exp/sample_hand/youtube_keypoint_normalized_fix
   batch_size: 64
   print_every: 100
   checkpoint_every: 1000

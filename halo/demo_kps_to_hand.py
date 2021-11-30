@@ -5,10 +5,6 @@ import pickle
 import os
 from scipy.spatial.transform import Rotation as R
 import matplotlib.pyplot as plt
-
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-ho3d_root = "/media/korrawe/ssd/ho3d/data/HO3D_V2/"
-
 import sys
 # sys.path.insert(0, ".")
 from models.halo_adapter.adapter import HaloAdapter
@@ -17,6 +13,8 @@ from opendr.camera import ProjectPoints
 from opendr.renderer import ColoredRenderer, TexturedRenderer
 from opendr.lighting import LambertianPointLight
 
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 def concat_meshes(mesh_list):
     '''manually concat meshes'''

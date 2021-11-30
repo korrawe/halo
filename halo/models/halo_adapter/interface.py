@@ -6,7 +6,9 @@ import os
 import torch
 import sys
 
-sys.path.insert(0, "/home/korrawe/nasa")
+# sys.path.insert(0, "/home/korrawe/nasa")
+# sys.path.insert(0, "../halo_base")
+sys.path.insert(0, "../../../nasa")
 from artihand import config, data
 from artihand.checkpoints import CheckpointIO
 
