@@ -5,8 +5,7 @@
 
 ![halo_teaser](/assets/teaser.jpg "HALO teaser")
 
-Link: [Paper PDF](https://arxiv.org/abs/2109.11399) <br/>
-Code: [HALO Github](https://github.com/korrawe/halo) <br/>
+Paper: [arXiv](https://arxiv.org/abs/2109.11399) <br/>
 Video: [Youtube](http://www.youtube.com/watch?feature=player_embedded&v=QBiAN8Bobuc) <br/>
 
 
@@ -18,14 +17,6 @@ The key benefits of HALO are
 (2) it provides a differentiable volumetric occupancy representation of the posed hand;
 (3) it can be trained end-to-end, allowing the formulation of losses on the hand surface that benefit the learning of 3D keypoints.  
 We demonstrate the applicability of HALO to the task of conditional generation of hands that grasp 3D objects. The differentiable nature of HALO is shown to improve the quality of the synthesized hands both in terms of physical plausibility and user preference. 
-
-# Video
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=QBiAN8Bobuc
-" target="_blank"><img src="http://img.youtube.com/vi/QBiAN8Bobuc/0.jpg" 
-alt="Halo video" width="720" height="540" border="10" /></a>
-
-# Insight
 
 # BibTex
 ```
