@@ -20,6 +20,9 @@ The key benefits of HALO are
 We demonstrate the applicability of HALO to the task of conditional generation of hands that grasp 3D objects. The differentiable nature of HALO is shown to improve the quality of the synthesized hands both in terms of physical plausibility and user preference. 
 
 # Running the code
+## Download the model
+HALO base: 
+HALO-VAE:
 
 ## Implicit surface from keypoints
 ![halo_hand](/assets/halo_hand.gif "HALO teaser")
