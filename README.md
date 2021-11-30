@@ -1,8 +1,7 @@
 # HALO: A Skeleton-Driven Neural Occupancy Representation for Articulated Hands
-Oral Presentation, 3DV 2021
+**Oral Presentation, 3DV 2021**
 
-## Korrawe Karunratanakul, Adrian Spurr, Zicong Fan, Otmar Hilliges, Siyu Tang
- ETH Zurich
+## Korrawe Karunratanakul, Adrian Spurr, Zicong Fan, Otmar Hilliges, Siyu Tang  <br/>  ETH Zurich
 
 
 # Abstract
