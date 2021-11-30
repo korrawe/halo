@@ -22,9 +22,10 @@ We demonstrate the applicability of HALO to the task of conditional generation o
 
 # Running the code
 ## Dependencies
-- [MANO model](https://github.com/hassony2/manopth) for data preprocessing
 - [im2mesh library from Occupancy Network](https://github.com/autonomousvision/occupancy_networks) for point sampling and marching cubes
 - ```requirements.txt```
+- [MANO model](https://github.com/hassony2/manopth) for data preprocessing
+
 The easiest way to run the code is to use [conda](https://docs.conda.io/en/latest/miniconda.html). The code is tested on Ubuntu 18.04.
 
 
