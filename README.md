@@ -3,8 +3,12 @@
 
 ### Korrawe Karunratanakul, Adrian Spurr, Zicong Fan, Otmar Hilliges, Siyu Tang  <br/>  ETH Zurich
 
-![alt text](https://github.com/korrawe/halo/raw/main/teaser.jpg "HALO teaser")
+![alt text](https://github.com/korrawe/halo/blob/main/teaser.jpg "HALO teaser")
 
+Link: [Paper PDF](https://arxiv.org/abs/2109.11399)
+
+
+Code: [HALO Github](https://github.com/korrawe/halo)
 
 # Abstract
 We present Hand ArticuLated Occupancy (HALO), a novel representation of articulated hands that bridges the advantages of 3D keypoints and neural implicit surfaces and can be used in end-to-end trainable architectures. Unlike existing statistical parametric hand models (e.g.~MANO), HALO directly leverages the 3D joint skeleton as input and produces a neural occupancy volume representing the posed hand surface.  
@@ -15,6 +19,10 @@ The key benefits of HALO are
 We demonstrate the applicability of HALO to the task of conditional generation of hands that grasp 3D objects. The differentiable nature of HALO is shown to improve the quality of the synthesized hands both in terms of physical plausibility and user preference. 
 
 # Video
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=QBiAN8Bobuc
+" target="_blank"><img src="http://img.youtube.com/vi/QBiAN8Bobuc/0.jpg" 
+alt="Halo video" width="720" height="540" border="10" /></a>
 
 # Insight
 
