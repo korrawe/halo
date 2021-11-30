@@ -20,7 +20,14 @@ The key benefits of HALO are
 We demonstrate the applicability of HALO to the task of conditional generation of hands that grasp 3D objects. The differentiable nature of HALO is shown to improve the quality of the synthesized hands both in terms of physical plausibility and user preference. 
 
 # Running the code
-Coming soon...
+
+## Implicit surface from keypoints
+To run a demo to produce implicit hand surface from the input keypoints, run:
+```
+cd halo
+python demo_kps_to_hand.py
+```
+The demo will produce each image in the animation about in the ```output``` folder
 
 
 # BibTex
