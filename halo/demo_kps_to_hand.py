@@ -10,12 +10,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 ho3d_root = "/media/korrawe/ssd/ho3d/data/HO3D_V2/"
 
 import sys
-# sys.path.insert(0, "/home/korrawe/halo_vae/")
 # sys.path.insert(0, ".")
 from models.halo_adapter.adapter import HaloAdapter
-# from visualize_utils import set_equal_xyz_scale
-# /home/korrawe/nasa/configs/iccv/yt3d_b16_keypoint_normalized_fix.yaml
-
 
 from opendr.camera import ProjectPoints
 from opendr.renderer import ColoredRenderer, TexturedRenderer
@@ -23,6 +19,7 @@ from opendr.lighting import LambertianPointLight
 
 
 def concat_meshes(mesh_list):
+    '''manually concat meshes'''
     cur_vert_number = 0
     cur_face_number = 0
     verts_list = []
@@ -79,12 +76,6 @@ def render_halo(kps, halo_adapter, renderer, out_img_path=None):
     return 
 
 
-def get_pkl_filename_list(seq_dir):
-    
-    onlyfiles = [f for f in os.listdir(seq_dir) if os.path.isfile(os.path.join(seq_dir, f))]
-    return onlyfiles
-
-
 def main():
     # Get renderer
     renderer = Renderer()
@@ -98,7 +89,7 @@ def main():
     # The convertion functions between different joint orderings can be found in "converter.py"
 
     # Get HALO adapter
-    halo_config_file = "/home/korrawe/nasa/configs/iccv/yt3d_b16_keypoint_normalized_fix.yaml"
+    halo_config_file = "../configs/halo_base/yt3d_b16_keypoint_normalized_fix.yaml"
     halo_adapter = HaloAdapter(halo_config_file, device=device, denoiser_pth=None)
 
     output_mesh_basedir = "../output/"

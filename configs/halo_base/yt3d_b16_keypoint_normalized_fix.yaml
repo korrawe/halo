@@ -1,0 +1,64 @@
+method: nasa
+data:
+  dataset: sample_hands
+  path: /home/korrawe/nasa/data/youtube_hand/youtube_keypoint_fixed_normalized
+  input_type: trans_matrix
+  train_split: train
+  val_split: val
+  test_split: test
+  subfolder: true
+  model_file: .off
+  points_subsample: 2048
+  mesh_verts_subsample: 2000
+model:
+  encoder_latent: null
+  decoder: piece_deform
+  decoder_c_dim: 16
+  decoder_kwargs:
+    num_bones: 16
+    projection: x
+    global_projection: o
+    global_pose_projection_size: 8
+    bone_latent_size: 16
+    dims : [64, 64, 64, 64]
+    dropout : []
+    dropout_prob : 0.2
+    norm_layers : []
+    latent_in : []
+    smooth_max: false
+    use_sigmoid : true
+    latent_dropout : false
+    weight_norm : false # true
+  encoder: null
+  c_dim: 256
+  z_dim: 0
+  skinning_weight: 0.0  # 2.0  #   0.5
+  use_bone_length: true
+training:
+  out_dir:  /home/korrawe/nasa/exp/sample_hand/youtube_keypoint_normalized_fix
+  batch_size: 64
+  print_every: 100
+  checkpoint_every: 1000
+  validate_every: 3000
+  model_selection_metric: iou
+  model_selection_mode: maximize
+  visualize_every: 1000
+test:
+  threshold: 0.5
+  eval_mesh: true
+  eval_pointcloud: false
+  model_file: model_best.pt
+generation:
+  batch_size: 100000
+  vis_n_outputs: 10
+  generate_mesh: true
+  generate_pointcloud: false
+  refine: false
+  refinement_step: 0
+  n_x: 128
+  n_z: 1
+  resolution_0: 64 # 32
+  upsampling_steps: 3 # 2
+  copy_groundtruth: true
+  vert_labels: false # true
+  convert_to_canonical: false
