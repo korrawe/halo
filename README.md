@@ -32,13 +32,13 @@ The demo will run the marching cubes algorithm and render each image in the anim
 
 
 # Evaluation
-## Hand model
+## HALO base model (implicit hand model)
 
 ## HALO-VAE
 The evaluation code for contact/interpenetration and cluster analysis can be found in ```halo/evaluate.py``` and ```halo/evaluate_cluster.py``` accordningly. The intersection test demo is in ```halo/utils/interscetion.py```
 
 # Training
-## Hand model
+## HALO base model (implicit hand model)
 To train HALO base model (implicit functions), run:
 ```
 cd halo_base
@@ -49,7 +49,11 @@ We use the surface point sampling and occupancy computation method from the [Occ
 
 
 ## HALO-VAE
-
+To train HALO-VAE, run:
+```
+cd halo
+python train.py
+```
 
 # BibTex
 ```
