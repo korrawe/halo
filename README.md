@@ -22,12 +22,13 @@ We demonstrate the applicability of HALO to the task of conditional generation o
 # Running the code
 
 ## Implicit surface from keypoints
-To run a demo to produce implicit hand surface from the input keypoints, run:
+![halo_hand](/assets/halo_hand.gif "HALO teaser")
+To try a demo which produces an implicit hand surface from the input keypoints, run:
 ```
 cd halo
 python demo_kps_to_hand.py
 ```
-The demo will produce each image in the animation about in the ```output``` folder
+The demo will produce each image in the animation above in the ```output``` folder
 
 
 # BibTex
