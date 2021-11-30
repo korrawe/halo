@@ -28,7 +28,26 @@ To try a demo which produces an implicit hand surface from the input keypoints, 
 cd halo
 python demo_kps_to_hand.py
 ```
-The demo will run the marching cubes algorithm and render each image in the animation above sequentially. The output images are in the ```output``` folder.
+The demo will run the marching cubes algorithm and render each image in the animation above sequentially. The output images are in the ```output``` folder. The provided sample sequence are interpolations beetween 17 randomly sampled poses from the unseen HO3D dataset  .
+
+
+# Evaluation
+## Hand model
+
+## HALO-VAE
+
+# Training
+## Hand model
+To train HALO base model (implicit functions), run:
+```
+cd halo_base
+python train.py
+```
+Each data point consists of 3D keypoints, transformation matrices, and a hand surface. To speed up the training, all transformation matrices are precomputed, either by out Canonicalization Layer or from the MANO.
+We use the surface point sampling and occupancy computation method from the [Occupancy Networks Code](https://github.com/autonomousvision/occupancy_networks)
+
+
+## HALO-VAE
 
 
 # BibTex
@@ -40,3 +59,6 @@ The demo will run the marching cubes algorithm and render each image in the anim
   year={2021}
 }
 ```
+
+# Acknowledgement
+We  sincerely  acknowledge  ShaofeiWang and Marko Mihajlovic for the insightful discussionsand helps with the baselines.
