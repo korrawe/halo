@@ -133,7 +133,6 @@ dmypy.json
 
 # HALO
 /output/
-/resource/
 
 # Experiment
 /tmp/
