@@ -3,7 +3,7 @@
 
 ### Korrawe Karunratanakul, Adrian Spurr, Zicong Fan, Otmar Hilliges, Siyu Tang  <br/>  ETH Zurich
 
-![alt text](https://github.com/korrawe/halo/blob/main/teaser.jpg "HALO teaser")
+![alt text](/assets/teaser.jpg "HALO teaser")
 
 Link: [Paper PDF](https://arxiv.org/abs/2109.11399)
 
