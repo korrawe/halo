@@ -7,8 +7,8 @@ import torch
 import sys
 
 # sys.path.insert(0, "/home/korrawe/nasa")
-# sys.path.insert(0, "../halo_base")
-sys.path.insert(0, "../../../nasa")
+sys.path.insert(0, "../halo_base")
+# sys.path.insert(0, "../../../nasa")
 from artihand import config, data
 from artihand.checkpoints import CheckpointIO
 
@@ -30,7 +30,7 @@ def get_halo_model(config_file):
     '''
     no_cuda = False
     print("config_file", config_file)
-    cfg = config.load_config(config_file, '/home/korrawe/nasa/configs/default.yaml')
+    cfg = config.load_config(config_file, '../halo_base/configs/default.yaml')
     is_cuda = (torch.cuda.is_available() and not no_cuda)
     device = torch.device("cuda" if is_cuda else "cpu")
 
