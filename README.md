@@ -23,6 +23,7 @@ We demonstrate the applicability of HALO to the task of conditional generation o
 ## Dependencies
 - [MANO model](https://github.com/hassony2/manopth) for data preprocessing
 - [im2mesh library from Occupancy Network](https://github.com/autonomousvision/occupancy_networks) for point sampling and marching cubes
+- ```requirements.txt```
 
 ## Implicit surface from keypoints
 ![halo_hand](/assets/halo_hand.gif "HALO teaser")
