@@ -41,7 +41,8 @@ To evaluate the hand surface, run:
 cd halo_base
 python eval_meshes.py
 ```
-You can find the produced meshes from our keypoint model on Youtube3D test set [here](https://drive.google.com/drive/folders/1dvz0R39Fk_iX2SnZ4G9tDyzfuOy8sbZN?usp=sharing).
+We provide the preprocessed test set of the Youtube3D [here](https://drive.google.com/drive/folders/1dRUPfWvr51VmaTmjHC6xvNrSQmkYMOSH?usp=sharing).
+In addition, you can also find the produced meshes from our keypoint model on the same test set [here](https://drive.google.com/drive/folders/1dvz0R39Fk_iX2SnZ4G9tDyzfuOy8sbZN?usp=sharing).
 
 
 ## HALO-VAE
