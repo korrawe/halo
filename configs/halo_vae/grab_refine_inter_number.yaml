@@ -1,0 +1,78 @@
+method: naive
+data:
+  dataset: obman
+  path: data/grab
+  input_type: trans_matrix
+  train_split: train
+  val_split: val
+  test_split: test
+  dim: 3
+  n_views: 24
+  pointcloud_n: 256
+  pointcloud_target_n: 1024
+  pointcloud_noise: 0.05
+  with_transforms: false
+model:
+  decoder: simple
+  encoder: resnet18
+  encoder_latent: null
+  decoder_kwargs: {}
+  encoder_kwargs: {}
+  encoder_latent_kwargs: {}
+  initialize_from: null
+  initialization_file_name: model_best.pt
+  object_dim: 256  # 128
+  z_dim: 32 # 64
+  object_hidden_dim: 256  # 256
+  decoder_dim: 256
+  use_camera: false
+  # dmc_weight_prior: 10.
+  kl_weight: 0.5  # 0.1
+  use_mesh_model: true  #  false
+  use_refine_net: true
+  use_inter_loss: true
+  halo_config_file: ../configs/halo_base/yt3d_b16_keypoint_normalized_fix.yaml
+  denoiser_pth: null
+training:
+  out_dir: ../resource/halo_vae
+  batch_size: 256  # 512 # 128  # 64
+  encoder_freeze_after: 80 # 60 30
+  print_every: 10
+  visualize_every: 2000
+  checkpoint_every: 1000
+  validate_every: 1000
+  backup_every: 100000
+  eval_sample: false
+  model_selection_metric: loss
+  model_selection_mode: minimize
+test:
+  threshold: 0.5
+  eval_mesh: true
+  eval_pointcloud: true
+  model_file: model_best.pt
+generation:
+  batch_size: 100000
+  refinement_step: 0
+  vis_n_outputs: 30
+  generate_keypoint: true
+  generate_mesh: true  #  false ####
+  generate_pointcloud: false # true
+  generation_dir: generation
+  use_sampling: false
+  resolution_0: 64
+  upsampling_steps: 2
+  vert_labels: false
+  convert_to_canonical: false
+  simplify_nfaces: null
+  copy_groundtruth: false
+  copy_input: true
+  latent_number: 4
+  latent_H: 8
+  latent_W: 8
+  latent_ny: 2
+  latent_nx: 2
+  latent_repeat: true
+preprocessor:
+  type: null
+  config: ""
+  model_file: null

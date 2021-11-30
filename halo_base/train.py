@@ -27,7 +27,7 @@ parser.add_argument('--exit-after', type=int, default=-1,
                          'with exit code 2.')
 
 args = parser.parse_args()
-cfg = config.load_config(args.config, 'configs/default.yaml')
+cfg = config.load_config(args.config, '../configs/halo_base/default.yaml')
 is_cuda = (torch.cuda.is_available() and not args.no_cuda)
 device = torch.device("cuda" if is_cuda else "cpu")
 

@@ -41,7 +41,7 @@ parser.add_argument('--random_rotate', action='store_true',
 # python generate.py /home/korrawe/halo_vae/configs/vae/grab_refine_inter_number.ymal --test_data data/obmean_test/ --inference
 
 args = parser.parse_args()
-cfg = config.load_config(args.config, 'configs/default.yaml')
+cfg = config.load_config(args.config, '../configs/halo_vae/default.yaml')
 is_cuda = (torch.cuda.is_available() and not args.no_cuda)
 device = torch.device("cuda" if is_cuda else "cpu")
 
@@ -144,12 +144,7 @@ for it, data in enumerate(tqdm(test_loader)):
     # Get index etc.
     idx = data['idx'].item()
 
-    # try:
-    #     model_dict = dataset.get_model_dict(idx)
-    # except AttributeError:
-    #     model_dict = {'model': str(idx), 'category': 'n/a'}
-    # # print(model_dict)
-    # modelname = model_dict
+
 
     # Create directories if necessary
     if vis_n_outputs >= 0 and not os.path.exists(generation_vis_dir):
@@ -160,33 +155,7 @@ for it, data in enumerate(tqdm(test_loader)):
         os.makedirs(mesh_dir)
         os.makedirs(kps_dir)
 
-    # if generate_pointcloud and not os.path.exists(pointcloud_dir):
-    #     os.makedirs(pointcloud_dir)
 
-    # if not os.path.exists(in_dir):
-    #     os.makedirs(in_dir)
-
-    # # Timing dict
-    # time_dict = {
-    #     'idx': idx,
-    #     # 'class id': category_id,
-    #     # 'class name': category_name,
-    #     'modelname': modelname,
-    # }
-    # time_dicts.append(time_dict)
-
-    # # Generate outputs
-    # out_file_dict = {}
-
-    # # Also copy ground truth
-    # if cfg['generation']['copy_groundtruth']:
-    #     modelpath = os.path.join(
-    #         # dataset.dataset_folder, category_id, modelname, 
-    #         dataset.dataset_folder, cfg['data']['test_split'],
-    #         cfg['data']['watertight_folder'],
-    #         modelname + cfg['data']['watertight_file'])
-    #     out_file_dict['gt'] = modelpath
-    # import pdb;pdb.set_trace()
     if generate_keypoint:
         t0 = time.time()
         # N = 20
@@ -195,99 +164,4 @@ for it, data in enumerate(tqdm(test_loader)):
         # print(out)
         keypoint_list.extend(out)
 
-    # if it > 2:
-    #     print(len(keypoint_list))
-    #     break
 
-    # if generate_mesh:
-    #     t0 = time.time()
-    #     out = generator.generate_mesh(data)
-    #     time_dict['mesh'] = time.time() - t0
-
-    #     # Get statistics
-    #     try:
-    #         mesh, stats_dict = out
-    #     except TypeError:
-    #         mesh, stats_dict = out, {}
-    #     time_dict.update(stats_dict)
-
-    #     # Write output
-    #     # mesh_out_file = os.path.join(mesh_dir, '%s.off' % modelname)
-    #     mesh_out_file = os.path.join(mesh_dir, '%s.obj' % modelname)
-    #     # print("mesh_out_file", mesh_out_file)
-    #     os.makedirs(os.path.dirname(mesh_out_file), exist_ok=True)
-    #     mesh.export(mesh_out_file)
-    #     out_file_dict['mesh'] = mesh_out_file
-
-    # if generate_pointcloud:
-    #     t0 = time.time()
-    #     pointcloud = generator.generate_pointcloud(data)
-    #     time_dict['pcl'] = time.time() - t0
-    #     pointcloud_out_file = os.path.join(
-    #         pointcloud_dir, '%s.ply' % modelname)
-    #     export_pointcloud(pointcloud, pointcloud_out_file)
-    #     out_file_dict['pointcloud'] = pointcloud_out_file
-
-    # if cfg['generation']['copy_input']:
-    #     # Save inputs
-    #     if input_type == 'trans_matrix':
-    #         pass
-    #         # TODO: create image/model of joints 
-    #     elif input_type == 'img':
-    #         inputs_path = os.path.join(in_dir, '%s.jpg' % modelname)
-    #         inputs = data['inputs'].squeeze(0).cpu()
-    #         visualize_data(inputs, 'img', inputs_path)
-    #         out_file_dict['in'] = inputs_path
-    #     elif input_type == 'voxels':
-    #         inputs_path = os.path.join(in_dir, '%s.off' % modelname)
-    #         inputs = data['inputs'].squeeze(0).cpu()
-    #         voxel_mesh = VoxelGrid(inputs).to_mesh()
-    #         voxel_mesh.export(inputs_path)
-    #         out_file_dict['in'] = inputs_path
-    #     elif input_type == 'pointcloud':
-    #         inputs_path = os.path.join(in_dir, '%s.ply' % modelname)
-    #         inputs = data['inputs'].squeeze(0).cpu().numpy()
-    #         export_pointcloud(inputs, inputs_path, False)
-    #         out_file_dict['in'] = inputs_path
-
-    # # Copy to visualization directory for first vis_n_output samples
-    # # c_it = model_counter[category_id]
-    # c_it = model_counter
-    # if c_it < vis_n_outputs:
-    #     # Save output files
-    #     img_name = '%02d.off' % c_it
-    #     for k, filepath in out_file_dict.items():
-    #         ext = os.path.splitext(filepath)[1]
-    #         out_file = os.path.join(generation_vis_dir, '%02d_%s%s'
-    #                                 % (c_it, k, ext))
-    #         shutil.copyfile(filepath, out_file)
-
-    # model_counter += 1
-
-if args.gen_denoiser_data:
-    # Dump generated keypoints
-    outfile_name = "/media/korrawe/ssd/halo_vae/data/gen_val_kps/val_gen_20perObj.pkl"
-    with open(outfile_name, 'wb') as p_f:
-        pickle.dump(keypoint_list, p_f)
-
-
-# with open(outfile_name, 'rb') as f:
-#     mynewlist = pickle.load(f)
-
-# import pdb; pdb.set_trace()
-
-# # Create pandas dataframe and save
-# time_df = pd.DataFrame(time_dicts)
-# time_df.set_index(['idx'], inplace=True)
-# time_df.to_pickle(out_time_file)
-
-# # Create pickle files  with main statistics
-# # time_df_class = time_df.groupby(by=['class name']).mean()
-# time_df_class = time_df.groupby(by=['modelname']).mean()
-
-# time_df_class.to_pickle(out_time_file_class)
-
-# # Print results
-# time_df_class.loc['mean'] = time_df_class.mean()
-# print('Timings [s]:')
-# print(time_df_class)
