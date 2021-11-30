@@ -35,6 +35,7 @@ The demo will run the marching cubes algorithm and render each image in the anim
 ## Hand model
 
 ## HALO-VAE
+The evaluation code for contact/interpenetration and cluster analysis can be found in ```halo/evaluate.py``` and ```halo/evaluate_cluster.py``` accordningly. The intersection test demo is in ```halo/utils/interscetion.py```
 
 # Training
 ## Hand model
