@@ -28,7 +28,7 @@ To try a demo which produces an implicit hand surface from the input keypoints, 
 cd halo
 python demo_kps_to_hand.py
 ```
-The demo will produce each image in the animation above in the ```output``` folder
+The demo will run the marching cubes algorithm and render each image in the animation above sequentially. The output images are in the ```output``` folder.
 
 
 # BibTex
