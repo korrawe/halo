@@ -41,6 +41,7 @@ The demo will run the marching cubes algorithm and render each image in the anim
 
 ## Dataset
 - The HALO-base model is trained using [Youtube3D hand](https://github.com/arielai/youtube_3d_hands) dataset. We only use the hand mesh ground truth without the images and videos. We provide the preprocessed data in the evaluation section.
+- The HALO-VAE model is trained and test on the [GRAB](https://grab.is.tue.mpg.de/) dataset
 
 # Evaluation
 ## HALO base model (implicit hand model)
