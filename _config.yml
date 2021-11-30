@@ -1,9 +1,0 @@
-theme: jekyll-theme-slate
-title: "HALO"
-description: "HALO: A Skeleton-Driven Neural Occupancy Representation for Articulated Hands"
-
-defaults:
-  - scope:
-      path: "assets"
-    values:
-      image: true
