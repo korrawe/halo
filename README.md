@@ -5,10 +5,11 @@
 
 ![alt text](/assets/teaser.jpg "HALO teaser")
 
-Link: [Paper PDF](https://arxiv.org/abs/2109.11399)
+Link: [Paper PDF](https://arxiv.org/abs/2109.11399) <br/>
+Code: [HALO Github](https://github.com/korrawe/halo) <br/>
+Video: [Youtube](http://www.youtube.com/watch?feature=player_embedded&v=QBiAN8Bobuc) <br/>
 
 
-Code: [HALO Github](https://github.com/korrawe/halo)
 
 # Abstract
 We present Hand ArticuLated Occupancy (HALO), a novel representation of articulated hands that bridges the advantages of 3D keypoints and neural implicit surfaces and can be used in end-to-end trainable architectures. Unlike existing statistical parametric hand models (e.g.~MANO), HALO directly leverages the 3D joint skeleton as input and produces a neural occupancy volume representing the posed hand surface.  
