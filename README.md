@@ -14,7 +14,7 @@ Video: [Youtube](http://www.youtube.com/watch?feature=player_embedded&v=QBiAN8Bo
 
 ## Updates
 
-- December 1 2021: Initial release for version 0.01 with demo.
+- December 1, 2021: Initial release for version 0.01 with demo.
 
 # Running the code
 ## Dependencies
