@@ -55,9 +55,6 @@ cfg['data']['random_rotate'] = False
 train_dataset = config.get_dataset('train', cfg)
 val_dataset = config.get_dataset('val', cfg)
 
-# for i in train_dataset:
-#     import pdb; pdb.set_trace()
-
 train_loader = torch.utils.data.DataLoader(
     train_dataset, batch_size=batch_size, num_workers=4, shuffle=True,
     collate_fn=data.collate_remove_none,
@@ -68,20 +65,12 @@ val_loader = torch.utils.data.DataLoader(
     collate_fn=data.collate_remove_none,
     worker_init_fn=data.worker_init_fn)
 
-# For visualizations
-# vis_loader = torch.utils.data.DataLoader(
-#     val_dataset, batch_size=12, shuffle=True,
-#     collate_fn=data.collate_remove_none,
-#     worker_init_fn=data.worker_init_fn)
-# data_vis = next(iter(vis_loader))
-
 # Model
 model = config.get_model(cfg, device=device, dataset=train_dataset)
 
 # Intialize training
 npoints = 1000
 optimizer = optim.Adam(model.parameters(), lr=1e-4)
-# optimizer = optim.SGD(model.parameters(), lr=1e-4, momentum=0.9)
 trainer = config.get_trainer(model, optimizer, cfg, device=device)
 
 # Load pre-trained model if existing
@@ -93,7 +82,6 @@ checkpoint_io = CheckpointIO(
     out_dir, initialize_from=cfg['model']['initialize_from'],
     initialization_file_name=cfg['model']['initialization_file_name'],
     **kwargs)
-# checkpoint_io = CheckpointIO(out_dir, model=model, optimizer=optimizer)
 try:
     load_dict = checkpoint_io.load('model.pt')
 except FileExistsError:
@@ -140,7 +128,6 @@ while True:
     if epoch_it == encoder_freeze_after:
         for param in model.obj_encoder.parameters():
             param.requires_grad = False
-    # scheduler.step()
 
     for batch in train_loader:
         it += 1

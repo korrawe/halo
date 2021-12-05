@@ -130,6 +130,7 @@ dmypy.json
 
 # VScode settings
 .vscode/
+workspace.code-workspace
 
 # HALO
 /output/

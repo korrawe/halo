@@ -38,7 +38,7 @@ parser.add_argument('--random_rotate', action='store_true',
 
 # python generate.py /home/korrawe/halo_vae/configs/vae/bmc_loss_grab_z16.yaml --latest --test_data data/grab_object --inference --random_rotate
 # python generate.py /home/korrawe/halo_vae/configs/vae/obman_baseline.yaml --test_data data/grab_object --inference
-# python generate.py /home/korrawe/halo_vae/configs/vae/grab_refine_inter_number.ymal --test_data data/obmean_test/ --inference
+# python generate.py /home/korrawe/halo_vae/configs/vae/grab_refine_inter_number.ymal --test_data data/obman_test/ --inference
 
 args = parser.parse_args()
 cfg = config.load_config(args.config, '../configs/halo_vae/default.yaml')

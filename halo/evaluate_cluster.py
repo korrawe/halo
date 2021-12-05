@@ -35,8 +35,7 @@ def seal(mesh_to_seal):
 def eval_grabnet():
     # For GrabNet
     # object_list = ['binoculars', 'camera', 'fryingpan', 'mug', 'toothpaste', 'wineglass']
-    # datalist_file = "/home/korrawe/halo_vae/data/ho3d/datalist.txt"
-    datalist_file = "/home/korrawe/halo_vae/data/obman_test/datalist.txt"
+    datalist_file = "../data/obman_test/datalist.txt"
     object_list = []
     with open(datalist_file, 'r') as f:
         for line in f:
@@ -47,16 +46,13 @@ def eval_grabnet():
     grab_to_mano = np.array([0, 13, 14, 15, 16, 1, 2, 3, 17, 4, 5, 6, 18, 10, 11, 12, 19, 7, 8, 9, 20])
 
     # GrabNet model results
-    # mesh_dir = '/home/korrawe/halo_vae/dataset/GrabNet/tests/test_grasp_results/'
-    mesh_dir = '/home/korrawe/halo_vae/dataset/GrabNet/tests/grab_new_objects/'
-    # mesh_dir = '/home/korrawe/halo_vae/dataset/GrabNet/tests/grab_new_objects_ho3d/'
+    mesh_dir = '..vae_out/tests/grab_new_objects/'
     for object_type in object_list:
         print()
         obj_dir = os.path.join(mesh_dir, object_type)
         kps_list = []
         n_sample = 5  # for Obman # 10  for ho3d  # 20 for GRAB
         for idx in range(n_sample):
-            # import pdb; pdb.set_trace()
             # Refine
             # hand_mesh_filename = os.path.join(obj_dir, 'rh_mesh_gen_%s.ply' % idx)
             # hand_kps_filename = os.path.join(obj_dir, 'j_rh_mesh_gen_%s.npy' % idx)
@@ -67,7 +63,6 @@ def eval_grabnet():
             print(hand_kps_filename)
             hand_kps = np.load(hand_kps_filename)
             hand_kps = hand_kps[grab_to_mano]
-            # import pdb; pdb.set_trace()
             hand_kps = hand_kps * 100.0
             hand_kps_before = hand_kps
 
@@ -80,7 +75,6 @@ def eval_grabnet():
             hand_kps_after = convert_joints(hand_kps_after, source='biomech', target='mano')
             hand_kps = hand_kps_after.squeeze(0).numpy()
 
-            # vis.visualise_skeleton(hand_kps, joint_order='mano', show=True)
 
             kps_flat = hand_kps.reshape(-1)
             kps_list.append(hand_kps)
@@ -99,51 +93,22 @@ def eval_grabnet():
 def eval_halo():
     # For HALO
     # object_list = ['binoculars', 'camera', 'fryingpan', 'mug', 'toothpaste', 'wineglass']
-    # datalist_file = "/home/korrawe/halo_vae/data/obman_test/datalist.txt"
-    datalist_file = "/home/korrawe/halo_vae/data/ho3d/datalist.txt"
+    datalist_file = "../data/ho3d/datalist.txt"
     object_list = []
     with open(datalist_file, 'r') as f:
         for line in f:
             object_list.append(line.strip()[:-4])
-    # mesh_file_0 = '/home/korrawe/halo_vae/exp/bmc_loss/generation_latest_grab_number/meshes/obj0_gt_obj_mesh.obj'
-    # mesh_file_1 = '/home/korrawe/halo_vae/exp/bmc_loss/generation_latest_grab_number/meshes/obj000_h000.obj'
-
-    # hand = trimesh.load(mesh_file_0, process=False)
-    # # hand = seal(hand)
-    # object = trimesh.load(mesh_file_1, process=False)
-
-    # # eval_tmp_dir = '/home/korrawe/halo_vae/dataset/GrabNet/tests/test_grasp_results/eval_temp'
-    # # eval_tmp_dir = '/home/korrawe/halo_vae/exp/bmc_loss/generation_latest_grab_number/meshes'
-    # eval_tmp_dir = '/home/korrawe/halo_vae/exp/bmc_loss_grab/generation_latest/meshes'
-
-    # vol, mesh_dist = intersection_eval(hand, object, res=0.001, scale=0.01, visualize_flag=True, visualize_file=eval_tmp_dir + '/output.off')
-    # print(vol)
-    # print(mesh_dist)
 
     kps_all_list = []
 
-    # hand_joints = convert_joints(hand_joints, source='mano', target='biomech')
-
     # GrabNet model results
-    # mesh_dir = '/home/korrawe/halo_vae/exp/bmc_loss_grab/generation_latest/meshes/'
-    # mesh_dir = '/home/korrawe/halo_vae/exp/grab_baseline_3/generation/meshes/'
-    # kps_dir = '/home/korrawe/halo_vae/exp/grab_refine/generation/kps/'
-    # kps_dir = '/home/korrawe/halo_vae/exp/grab_refine/generation_number_3refine_no_rot/kps/'
-    # kps_dir = '/home/korrawe/halo_vae/exp/grab_refine_inter_2/generation_latest_17/kps/'
-    # kps_dir = '/home/korrawe/halo_vae/exp/grab_refine_inter_2/generation/kps/'
-    # kps_dir = '/home/korrawe/halo_vae/exp/grab_refine_inter_2/generation_obman/kps/'
-    kps_dir = '/home/korrawe/halo_vae/exp/grab_refine_inter_2/generation_ho3d/kps/'
+    kps_dir = '../exp/grab_refine_inter_2/generation_ho3d/kps/'
     for obj_idx, object_type in enumerate(object_list):
-        print()
-        # obj_dir = kps_dir  # os.path.join(mesh_dir, object_type)
-        # obj_mesh_filename = os.path.join(obj_dir, 'obj%s_gt_obj_mesh.obj' % obj_idx)
-        # obj_mesh_filename = os.path.join(obj_dir, '%s_gt_obj_mesh.obj' % object_type)
 
         kps_list = []
         mesh_dist_list = []
         n_sample = 10  # 5  # 20
         for idx in range(n_sample):
-            # import pdb; pdb.set_trace()
             # hand_mesh_filename = os.path.join(obj_dir, 'obj%03d_h%03d.obj' % (obj_idx, idx))
             # hand_kps_filename = os.path.join(kps_dir, '%s_%03d_refine.npy' % (object_type, idx))
             hand_kps_filename = os.path.join(kps_dir, '%s_%03d.npy' % (object_type, idx))
@@ -151,8 +116,6 @@ def eval_halo():
             print(hand_kps_filename)
 
             hand_kps = np.load(hand_kps_filename)
-            # import pdb; pdb.set_trace()
-            # hand_kps = hand_kps / 100.0
             hand_kps_before = hand_kps
             hand_kps = torch.from_numpy(hand_kps).unsqueeze(0)
             is_right_vec = torch.ones(hand_kps.shape[0], device=hand_kps.device)
@@ -162,9 +125,6 @@ def eval_halo():
             hand_kps_after, _ = transform_to_canonical(hand_kps, is_right_vec)
             hand_kps_after = convert_joints(hand_kps_after, source='biomech', target='mano')
             hand_kps = hand_kps_after.squeeze(0).numpy()
-
-            # vis.visualise_skeleton(hand_kps_before, joint_order='mano', show=False, color='green')
-            # vis.visualise_skeleton(hand_kps, joint_order='mano', show=True)
 
             kps_flat = hand_kps.reshape(-1)
             kps_list.append(hand_kps)
@@ -183,22 +143,15 @@ def eval_halo():
 def eval_halo_mano():
     # For HALO
     object_list = ['binoculars', 'camera', 'fryingpan', 'mug', 'toothpaste', 'wineglass']
-
     kps_all_list = []
 
-    # hand_joints = convert_joints(hand_joints, source='mano', target='biomech')
-    kps_dir = '/home/korrawe/halo_vae/exp/grab_baseline_mano/generation/kps/'
+    kps_dir = '../exp/grab_baseline_mano/generation/kps/'
     for obj_idx, object_type in enumerate(object_list):
-        print()
-        # obj_dir = kps_dir  # os.path.join(mesh_dir, object_type)
-        # obj_mesh_filename = os.path.join(obj_dir, 'obj%s_gt_obj_mesh.obj' % obj_idx)
-        # obj_mesh_filename = os.path.join(obj_dir, '%s_gt_obj_mesh.obj' % object_type)
 
         kps_list = []
         mesh_dist_list = []
         n_sample = 20
         for idx in range(n_sample):
-            # import pdb; pdb.set_trace()
             # hand_mesh_filename = os.path.join(obj_dir, 'obj%03d_h%03d.obj' % (obj_idx, idx))
             hand_kps_filename = os.path.join(kps_dir, '%s_%03d.npy' % (object_type, idx))
             # hand_kps_filename = os.path.join(kps_dir, '%s_%03d_refine.npy' % (object_type, idx))
@@ -206,8 +159,6 @@ def eval_halo_mano():
             print(hand_kps_filename)
 
             hand_kps = np.load(hand_kps_filename)
-            import pdb; pdb.set_trace()
-            # hand_kps = hand_kps / 100.0
             hand_kps_before = hand_kps
             hand_kps = torch.from_numpy(hand_kps).unsqueeze(0)
             is_right_vec = torch.ones(hand_kps.shape[0], device=hand_kps.device)
@@ -218,16 +169,12 @@ def eval_halo_mano():
             hand_kps_after = convert_joints(hand_kps_after, source='biomech', target='mano')
             hand_kps = hand_kps_after.squeeze(0).numpy()
 
-            # vis.visualise_skeleton(hand_kps_before, joint_order='mano', show=False, color='green')
-            # vis.visualise_skeleton(hand_kps, joint_order='mano', show=True)
-
             kps_flat = hand_kps.reshape(-1)
             kps_list.append(hand_kps)
             kps_all_list.append(kps_flat)
 
         print(" -- ", object_type, " -- ")
 
-    # import pdb; pdb.set_trace()
     kps_all = np.stack(kps_all_list, axis=0)  # [120, 63]
     cls_num = 20
     entropy, dist = diversity(kps_all, cls_num=cls_num)
@@ -238,8 +185,7 @@ def eval_halo_mano():
 def eval_gf():
     # For HALO
     # object_list = ['binoculars', 'camera', 'fryingpan', 'mug', 'toothpaste', 'wineglass']
-    # datalist_file = "/home/korrawe/halo_vae/data/obman_test/datalist.txt"
-    datalist_file = "/home/korrawe/halo_vae/data/ho3d/datalist.txt"
+    datalist_file = "../data/ho3d/datalist.txt"
     object_list = []
     with open(datalist_file, 'r') as f:
         for line in f:
@@ -247,15 +193,8 @@ def eval_gf():
 
     kps_all_list = []
 
-    # hand_joints = convert_joints(hand_joints, source='mano', target='biomech')
-    # mesh_dir = '/home/korrawe/GF/grasping_field/output/mano/'
-    # obj_dir = '/home/korrawe/GF/grasping_field/input/'
-    kps_dir = '/home/korrawe/GF/grasping_field/output/kps/'
+    kps_dir = '../grasping_field/output/kps/'
     for obj_idx, object_type in enumerate(object_list):
-        print()
-        # obj_dir = kps_dir  # os.path.join(mesh_dir, object_type)
-        # obj_mesh_filename = os.path.join(obj_dir, 'obj%s_gt_obj_mesh.obj' % obj_idx)
-        # obj_mesh_filename = os.path.join(obj_dir, '%s_gt_obj_mesh.obj' % object_type)
 
         kps_list = []
         mesh_dist_list = []
@@ -269,7 +208,6 @@ def eval_gf():
             print(hand_kps_filename)
 
             hand_kps = np.load(hand_kps_filename)
-            # import pdb; pdb.set_trace()
             hand_kps = hand_kps * 100.0
             hand_kps_before = hand_kps
             hand_kps = torch.from_numpy(hand_kps).unsqueeze(0)
@@ -281,16 +219,12 @@ def eval_gf():
             hand_kps_after = convert_joints(hand_kps_after, source='biomech', target='mano')
             hand_kps = hand_kps_after.squeeze(0).numpy()
 
-            # vis.visualise_skeleton(hand_kps_before, joint_order='mano', show=False, color='green')
-            # vis.visualise_skeleton(hand_kps, joint_order='mano', show=True)
-
             kps_flat = hand_kps.reshape(-1)
             kps_list.append(hand_kps)
             kps_all_list.append(kps_flat)
 
         print(" -- ", object_type, " -- ")
 
-    # import pdb; pdb.set_trace()
     kps_all = np.stack(kps_all_list, axis=0)  # [120, 63]
     cls_num = 20
     entropy, dist = diversity(kps_all, cls_num=cls_num)
@@ -300,7 +234,6 @@ def eval_gf():
 
 def diversity(params_list, cls_num=20):
     # params_list = scipy.cluster.vq.whiten(params_list)
-    # import pdb; pdb.set_trace()
     #  # k-means
     codes, dist = scipy.cluster.vq.kmeans(params_list, cls_num)  # codes: [20, 72], dist: scalar
     vecs, dist = scipy.cluster.vq.vq(params_list, codes)  # assign codes, vecs/dist: [1200]
