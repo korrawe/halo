@@ -2,8 +2,8 @@
 This manolayer.py is a modified version of Yana's Hasson pytorch implementation 
 of the MANO model (https://github.com/hassony2/manopth).
 
-We made the following change to the original file to get the transformation matrices 
-necessary for traing HALO model.
+We made the following changes to the original file to get the transformation matrices 
+necessary for training the HALO model.
  - No logical change has been made to the way the transformation matrices are computed.
  - The forward pass also returns more values including
     - trans_matrix: The transformation matrices for each joint
