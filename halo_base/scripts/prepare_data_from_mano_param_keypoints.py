@@ -17,7 +17,7 @@ from manopth.tensutils import (th_posemap_axisang, th_with_zeros)
 
 from visualize_utils import set_equal_xyz_scale, compare_joints
 
-sys.path.insert(0, "/home/korrawe/halo_vae")
+sys.path.insert(0, "../../halo")
 from models.halo_adapter.converter import PoseConverter, transform_to_canonical
 from models.halo_adapter.interface import (convert_joints, change_axes)
 #                                            get_bone_lengths, scale_halo_trans_mat)

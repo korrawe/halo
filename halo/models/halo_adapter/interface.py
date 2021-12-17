@@ -6,21 +6,9 @@ import os
 import torch
 import sys
 
-# sys.path.insert(0, "/home/korrawe/nasa")
-sys.path.insert(0, "../halo_base")
-# sys.path.insert(0, "../../../nasa")
+sys.path.insert(0, "../../halo_base")
 from artihand import config, data
 from artihand.checkpoints import CheckpointIO
-
-# from matplotlib import pyplot as plt
-
-# import visualize_utils
-# from visualize_utils import display_surface_points
-# from sample_utils import sample_surface_with_label
-# from mesh_utils import (get_bone_lengths, get_verts_association, seal)
-
-# from manopth.manolayer import ManoLayer
-# from manopth import demo
 
 
 def get_halo_model(config_file):
