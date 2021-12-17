@@ -45,7 +45,6 @@ class InferenceDataset(data.Dataset):
         with open(split_file, 'r') as f:
             self.object_names = f.read().strip().split('\n')
 
-        # import pdb; pdb.set_trace()
         # Use groundtruth rots and trans
         self.use_gt_rots = False
         object_names_full = []
@@ -69,14 +68,12 @@ class InferenceDataset(data.Dataset):
         self.object_names = object_names_full
         self.obj_rots = obj_rots
         self.obj_trans = obj_trans
-        # import pdb; pdb.set_trace()
 
         self.use_inside_points = False
         if self.use_inside_points:
             # Load inside points
-            sampled_point_path = '/home/korrawe/halo_vae/data/grab/test_sample_vol.npz'
+            sampled_point_path = '../data/grab/test_sample_vol.npz'
             sample_points = np.load(sampled_point_path)
-            # import pdb; pdb.set_trace()
             points_dict = {}
             for k in sample_points.files:
                 points_dict[k] = sample_points[k]
@@ -92,9 +89,6 @@ class InferenceDataset(data.Dataset):
         Args:
             idx (int): ID of data point
         '''
-        # model = self.models[idx]
-
-        # split_path = os.path.join(self.dataset_folder, self.split)
         filename = os.path.join(self.dataset_folder, self.object_names[idx])
 
         data = {}
@@ -107,9 +101,7 @@ class InferenceDataset(data.Dataset):
             # surface_points = torch.from_numpy(load_points(filename)).float()
             pass
 
-        # import pdb; pdb.set_trace()
         if self.random_rotate:
-            # import pdb; pdb.set_trace()
             # data['object_points'], data['hand_joints'], data['rot_mat'] = random_rotate(data['object_points'], data['hand_joints'])
             x_angle = np.random.rand() * np.pi * 2.0
             y_angle = np.random.rand() * np.pi * 2.0
@@ -158,7 +150,6 @@ class InferenceDataset(data.Dataset):
 
     def obj_to_origin(self, object_points):
         # obj_center = object_points.mean(axis=0)
-        # import pdb; pdb.set_trace()
         min_p, _ = object_points.min(0)
         max_p, _ = object_points.max(0)
         obj_center = (max_p + min_p) / 2.0

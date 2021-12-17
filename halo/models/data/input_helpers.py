@@ -42,7 +42,4 @@ def random_rotate(object_points, hand_joints):
     new_obj_points = np.matmul(rot_mat, np.expand_dims(object_points, -1)).squeeze(-1)
     new_hand_joints = np.matmul(rot_mat, np.expand_dims(hand_joints, -1)).squeeze(-1)
 
-    # new_obj_points, rot_mat = rotate_by_angle(object_points, x_angle, y_angle, z_angle)
-    # new_hand_joints, _ = rotate_by_angle(hand_joints, x_angle, y_angle, z_angle)
-
     return new_obj_points, new_hand_joints, rot_mat

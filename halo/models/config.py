@@ -3,24 +3,11 @@ import yaml
 from torchvision import transforms
 from models import naive
 from models import data
-# from artihand import nasa
 
-# from im2mesh import data
-# from im2mesh import onet, r2n2, psgn, pix2mesh, dmc
-# from im2mesh import preprocess
-
-# method_dict = {
-#     'onet': onet,
-#     'r2n2': r2n2,
-#     'psgn': psgn,
-#     'pix2mesh': pix2mesh,
-#     'dmc': dmc,
-# }
 
 method_dict = {
     'naive': naive
 }
-
 
 # General config
 def load_config(path, default_path=None):
@@ -141,25 +128,6 @@ def get_dataset(mode, cfg, return_idx=False, return_category=False):
     split = splits[mode]
     # Create dataset
     if dataset_type == 'obman':
-        # print("sample hand dataset")
-        # print("folder", dataset_folder)
-
-        # Method specific data
-        # data_loader_helpers = method_dict[method].config.get_data_helpers(mode, cfg)
-        # transforms_dict = method_dict[method].config.get_data_transforms(mode, cfg)
-        # Input data
-        # input_helper = get_inputs_helper(mode, cfg)
-        # if input_helper is not None:
-        #     data_loader_helpers['inputs'] = input_helper
-
-        # input_helper = None
-        # dataset = data.SampleHandDataset(
-        #     dataset_folder, data_loader_helpers, # input_helper,
-        #     transforms=transforms_dict,
-        #     split=split,
-        #     no_except=False,
-        #     return_idx=return_idx
-        # )
         dataset = data.ObmanDataset(
             dataset_folder,
             split=split,
@@ -201,45 +169,6 @@ def get_inputs_helper(mode, cfg):
             use_bone_length=cfg['model']['use_bone_length'],
             unpackbits=cfg['data']['points_unpackbits']
         )
-
-    # elif input_type == 'img':
-    #     if mode == 'train' and cfg['data']['img_augment']:
-    #         resize_op = transforms.RandomResizedCrop(
-    #             cfg['data']['img_size'], (0.75, 1.), (1., 1.))
-    #     else:
-    #         resize_op = transforms.Resize((cfg['data']['img_size']))
-
-    #     transform = transforms.Compose([
-    #         resize_op, transforms.ToTensor(),
-    #     ])
-
-    #     with_camera = cfg['data']['img_with_camera']
-
-    #     if mode == 'train':
-    #         random_view = True
-    #     else:
-    #         random_view = False
-
-    #     inputs_field = data.ImagesField(
-    #         cfg['data']['img_folder'], transform,
-    #         with_camera=with_camera, random_view=random_view
-    #     )
-    # elif input_type == 'pointcloud':
-    #     transform = transforms.Compose([
-    #         data.SubsamplePointcloud(cfg['data']['pointcloud_n']),
-    #         data.PointcloudNoise(cfg['data']['pointcloud_noise'])
-    #     ])
-    #     with_transforms = cfg['data']['with_transforms']
-    #     inputs_field = data.PointCloudField(
-    #         cfg['data']['pointcloud_file'], transform,
-    #         with_transforms=with_transforms
-    #     )
-    # elif input_type == 'voxels':
-    #    inputs_field = data.VoxelsField(
-    #        cfg['data']['voxels_file']
-    #    )
-    # elif input_type == 'idx':
-    #     inputs_field = data.IndexField()
     else:
         raise ValueError(
             'Invalid input type (%s)' % input_type)

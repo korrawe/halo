@@ -149,7 +149,6 @@ workspace.code-workspace
 /halo/scripts/resource/
 /halo/scripts/dataset/mano/
 /halo_base/exp/
-/halo_base/scripts/manopth/
 /halo_base/scripts/mano/
 /halo_base/scripts/resource/
 /halo_base/scripts/dataset/mano/
