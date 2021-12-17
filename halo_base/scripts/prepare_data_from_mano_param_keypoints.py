@@ -5,6 +5,7 @@ import argparse
 import os
 import glob
 import pickle
+import sys
 
 from manopth.manolayer import ManoLayer
 from manopth import demo
@@ -16,8 +17,6 @@ from manopth.tensutils import (th_posemap_axisang, th_with_zeros)
 
 from visualize_utils import set_equal_xyz_scale, compare_joints
 
-import sys
-
 sys.path.insert(0, "/home/korrawe/halo_vae")
 from models.halo_adapter.converter import PoseConverter, transform_to_canonical
 from models.halo_adapter.interface import (convert_joints, change_axes)
@@ -26,21 +25,17 @@ from models.halo_adapter.transform_utils import xyz_to_xyz1
 
 parser = argparse.ArgumentParser('Sample a watertight mesh.')
 parser.add_argument('--root_folder', type=str,
-                    default='/home/korrawe/nasa/data/youtube_hand/youtube_keypoint_no_scale/train',
-                    # default='/home/korrawe/nasa/data/overfit/Subject_2_squeeze_paper_1_resample/test',
+                    default='../../data/test_data_code/test',
                     help='Output path root.')
 parser.add_argument('--mano_folder', type=str,
-                    default='/home/korrawe/nasa/data/youtube_hand/raw/train_sub_folder',  # train_sub_folder
-                    # default='/home/korrawe/nasa/data/FHB/test/Subject_2_squeeze_paper_1/test/mano',
-                    help='Output path root.')
+                    default='../../data/youtubehand_raw',
+                    help='Mano params path root.')
 parser.add_argument('--mesh_folder', type=str,
-                    default='/home/korrawe/nasa/data/youtube_hand/youtube_keypoint_no_scale/train/mesh',
-                    # default='/home/korrawe/nasa/data/overfit/Subject_2_squeeze_paper_1_resample/test/mesh',
+                    default='../../data/test_data_code/test/mesh',
                     help='Output path for mesh.')
 parser.add_argument('--meta_folder', type=str,
-                    default='/home/korrawe/nasa/data/youtube_hand/youtube_keypoint_no_scale/train/meta',
-                    # default='/home/korrawe/nasa/data/overfit/Subject_2_squeeze_paper_1_resample/test/meta',
-                    help='Output path for points.')
+                    default='../../data/test_data_code/test/meta',
+                    help='Output path for meta data.')
 
 parser.add_argument('--subfolder', action='store_true',
                     help='Whether the data is stored in a sequential subfolder (./0/, ./1/, ./2/).')
@@ -51,8 +46,8 @@ parser.add_argument('--local_coord', action='store_true',
 parser.add_argument('--normalize', action='store_true',
                     help='If ture, hand rotation with global normalizer')
 
+
 def get_verts_association(skinning_weight_npy):
-    # skinning_weight_npy = 'resource/skinning_weight_r.npy'
     data = np.load(skinning_weight_npy)
     max_weight = data.argmax(1)
     return max_weight
@@ -80,8 +75,7 @@ def get_translation_mat(vec):
     # vec must be 3x1 matrix
     rot = torch.eye(3)
     mat_4_3 = torch.cat([rot, torch.zeros(1, 3)], 0).repeat(16, 1, 1)
-    # print(mat_4_3.shape)
-    trans_4_1 = torch.cat([vec, vec.new_ones(16, 1)], 1)
+    trans_4_1 = torch.cat([vec[:16], vec.new_ones(16, 1)], 1)
     translation = torch.cat([mat_4_3, trans_4_1.unsqueeze(2)], 2)
     return translation
 
@@ -228,7 +222,7 @@ def main(args):
         hand_joints = hand_joints[0,:]
         joints_trans = joints_trans[0,:]
         rest_pose_verts = rest_pose_verts[0,:]
-        rest_pose_joints = rest_pose_joints[0, :]
+        rest_pose_joints = rest_pose_joints[0, :16]
         rest_pose_joints_original = rest_pose_joints + 0
 
         root_xyz = hand_joints[0]
@@ -248,7 +242,7 @@ def main(args):
         neg_rest_pose_joints = -1. * rest_pose_joints
         translation = get_translation_mat(neg_rest_pose_joints)
         new_trans_mat = torch.matmul(joints_trans, translation)
-        rest_pose_joints = torch.cat([rest_pose_joints, rest_pose_joints.new_ones(16, 1)], 1)
+        rest_pose_joints = torch.cat([rest_pose_joints[:16], rest_pose_joints.new_ones(16, 1)], 1)
         new_trans_mat[:, :3, 3] = new_trans_mat[:, :3, 3] - root_xyz
         # final_joints = torch.matmul(new_trans_mat, rest_pose_joints.unsqueeze(2))
 
@@ -260,22 +254,14 @@ def main(args):
         # print("posed_joints", posed_joints.shape)
 
         # check back project to origin
-        # print("joints_trans", joints_trans)
         tmp_joints = joints_trans + 0
         tmp_joints[:, :3, 3] = tmp_joints[:, :3, 3] - root_xyz
-        # print("tmp_joints",tmp_joints)
         inv_global_trans_mat = np.linalg.inv(tmp_joints)
         # try adding global scale after inverse
         # Transform meta data
         scale_mat = np.identity(4) / 0.4
         scale_mat[3,3] = 1.
         inv_global_trans_mat = np.matmul(scale_mat, inv_global_trans_mat)
-
-        # global_back_project = torch.matmul(torch.from_numpy(inv_global_trans_mat).float(), posed_joints.unsqueeze(2))
-
-        # inverse
-        inv_new_trans_mat = np.linalg.inv(new_trans_mat)
-        # back_projected_joints = torch.matmul(torch.from_numpy(inv_new_trans_mat).float(), posed_joints.unsqueeze(2))
 
         if visualize:
             demo.display_hand({
