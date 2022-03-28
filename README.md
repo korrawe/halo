@@ -92,7 +92,7 @@ HALO_VAE requires a HALO base model trained using the transformation matrices fr
 ```
 @inproceedings{karunratanakul2021halo,
   title={A Skeleton-Driven Neural Occupancy Representation for Articulated Hands},
-  author={Karunratanakul, Korrawe and, Spurr, Adrian and Fan, Zicong and Hilliges, Otmar and Tang, Siyu},
+  author={Karunratanakul, Korrawe and Spurr, Adrian and Fan, Zicong and Hilliges, Otmar and Tang, Siyu},
   booktitle={International Conference on 3D Vision (3DV)},
   year={2021}
 }
