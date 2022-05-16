@@ -69,7 +69,7 @@ The evaluation code for contact/interpenetration and cluster analysis can be fou
 ## HALO base model (implicit hand model)
 
 ### Data Preprocessing
-Each data point consists of 3D keypoints, transformation matrices, and a hand surface. To speed up the training, all transformation matrices are precomputed, either by out Canonicalization Layer or from the MANO. Please check ```halo/halo_base/prepare_data_from_mano_param_keypoints.py``` for details.
+Each data point consists of 3D keypoints, transformation matrices, and a hand surface. To speed up the training, all transformation matrices are precomputed, either by out Canonicalization Layer or from the MANO. Please check ```halo/halo_base/prepare_data_from_mano_param_keypoints.py``` for details. After the metadata is processed, sample points and compute occupancy values with ```bash build_dataset.sh```.
 We use the surface point sampling and occupancy computation method from the [Occupancy Networks](https://github.com/autonomousvision/occupancy_networks)
  
 ### Run
@@ -92,7 +92,7 @@ HALO_VAE requires a HALO base model trained using the transformation matrices fr
 ```
 @inproceedings{karunratanakul2021halo,
   title={A Skeleton-Driven Neural Occupancy Representation for Articulated Hands},
-  author={Karunratanakul, Korrawe and, Spurr, Adrian and Fan, Zicong and Hilliges, Otmar and Tang, Siyu},
+  author={Karunratanakul, Korrawe and Spurr, Adrian and Fan, Zicong and Hilliges, Otmar and Tang, Siyu},
   booktitle={International Conference on 3D Vision (3DV)},
   year={2021}
 }
